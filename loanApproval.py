@@ -21,8 +21,8 @@ with col1:
     Self_Employed = st.selectbox("Self Employed", ["Yes", "No"])
 
 with col2:
-    ApplicantIncome = st.number_input("Applicant Income", min_value=0)
-    CoapplicantIncome = st.number_input("Coapplicant Income", min_value=0)
+    ApplicantIncome = st.number_input("Applicant Income(in thousands)", min_value=0)
+    CoapplicantIncome = st.number_input("Coapplicant Income (in thousands)", min_value=0)
     LoanAmount = st.number_input("Loan Amount (in thousands)", min_value=0)
     Loan_Amount_Term = st.number_input("Loan Amount Term (in days)", min_value=0)
     Credit_History = st.selectbox("Credit History", ["Has Credit History", "No Credit History"])
