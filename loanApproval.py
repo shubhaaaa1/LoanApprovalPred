@@ -16,6 +16,23 @@ Welcome to the intelligent Loan Approval Predictor.
 Fill out the details below and find out if your loan application might be approved.
 """)
 
+
+col1, col2 = st.columns(2)
+
+with col1:
+    Gender = st.selectbox("Gender", ["Male", "Female"])
+    Married = st.selectbox("Married", ["Yes", "No"])
+    Dependents = st.selectbox("Dependents", ["0", "1", "2", "3+"])
+    Education = st.selectbox("Education", ["Graduate", "Not Graduate"])
+    Self_Employed = st.selectbox("Self Employed", ["Yes", "No"])
+
+with col2:
+    ApplicantIncome = st.number_input("Applicant Income", min_value=0)
+    CoapplicantIncome = st.number_input("Coapplicant Income", min_value=0)
+    LoanAmount = st.number_input("Loan Amount (in thousands)", min_value=0)
+    Loan_Amount_Term = st.number_input("Loan Amount Term (in days)", min_value=0)
+    Credit_History = st.selectbox("Credit History", ["Has Credit History", "No Credit History"])
+    Property_Area = st.selectbox("Property Area", ["Urban", "Rural", "Semiurban"])
 # Load and preprocess data
 df = pd.read_csv("loan_dataset.csv")
 df = pd.DataFrame(SimpleImputer(strategy='most_frequent').fit_transform(df), columns=df.columns)
@@ -40,23 +57,6 @@ model = VotingClassifier(estimators=[
 ], voting='hard')
 model.fit(X_train, y_train)
 
-# Input fields
-col1, col2 = st.columns(2)
-
-with col1:
-    Gender = st.selectbox("Gender", ["Male", "Female"])
-    Married = st.selectbox("Married", ["Yes", "No"])
-    Dependents = st.selectbox("Dependents", ["0", "1", "2", "3+"])
-    Education = st.selectbox("Education", ["Graduate", "Not Graduate"])
-    Self_Employed = st.selectbox("Self Employed", ["Yes", "No"])
-
-with col2:
-    ApplicantIncome = st.number_input("Applicant Income", min_value=0)
-    CoapplicantIncome = st.number_input("Coapplicant Income", min_value=0)
-    LoanAmount = st.number_input("Loan Amount (in thousands)", min_value=0)
-    Loan_Amount_Term = st.number_input("Loan Amount Term (in days)", min_value=0)
-    Credit_History = st.selectbox("Credit History", ["Has Credit History", "No Credit History"])
-    Property_Area = st.selectbox("Property Area", ["Urban", "Rural", "Semiurban"])
 
 if st.button("🔍 Predict Loan Status"):
     gender_map = {"Male": 1, "Female": 0}
